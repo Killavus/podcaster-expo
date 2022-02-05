@@ -3,7 +3,8 @@ import {
   createNativeStackNavigator,
   NativeStackScreenProps,
 } from "@react-navigation/native-stack"
-import { Home, Podcast } from "../App"
+import { Home } from "../screens/Home"
+import { Podcast } from "../screens/Podcast"
 
 type MainNavigationParamList = {
   Home: never
