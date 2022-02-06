@@ -16,7 +16,6 @@ import Animated, {
   useDerivedValue,
   withSpring,
 } from "react-native-reanimated"
-import { Feather } from "@expo/vector-icons"
 import { FeedChannel } from "../../entities/feed"
 
 type HeaderProps = { podcast: FeedChannel; listScrollY: number }
