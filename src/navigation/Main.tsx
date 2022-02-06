@@ -5,10 +5,12 @@ import {
 } from "@react-navigation/native-stack"
 import { Home } from "../screens/Home"
 import { Podcast } from "../screens/Podcast"
+import PodcastInfo from "../screens/PodcastInfo"
 
 type MainNavigationParamList = {
   Home: never
   Podcast: { url: string }
+  PodcastInfo: { url: string }
 }
 
 const MainNavigationStack =
@@ -17,13 +19,8 @@ const MainNavigationStack =
 const MainNavigation = () => (
   <MainNavigationStack.Navigator initialRouteName="Home">
     <MainNavigationStack.Screen name="Home" component={Home} />
-    <MainNavigationStack.Screen
-      name="Podcast"
-      component={Podcast}
-      options={{
-        headerBackTitleVisible: false,
-      }}
-    />
+    <MainNavigationStack.Screen name="Podcast" component={Podcast} />
+    <MainNavigationStack.Screen name="PodcastInfo" component={PodcastInfo} />
   </MainNavigationStack.Navigator>
 )
 

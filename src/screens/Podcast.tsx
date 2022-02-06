@@ -1,12 +1,31 @@
 import React, { useEffect } from "react"
 import { StatusBar } from "expo-status-bar"
-import { SafeAreaView } from "react-native"
+import { SafeAreaView, TouchableOpacity } from "react-native"
+import { Feather } from "@expo/vector-icons"
+import { useState } from "react"
 import { MainNavigationScreen } from "../navigation/Main"
 import usePodcast from "../hooks/usePodcast"
 import WithLoaded from "../components/WithLoaded"
 import PodcastHome from "./Podcast/PodcastHome"
 
-type PodcastProps = MainNavigationScreen<any>
+function renderTopAction(
+  route: PodcastProps["route"],
+  navigation: PodcastProps["navigation"]
+) {
+  return (
+    <>
+      <TouchableOpacity
+        accessibilityRole="button"
+        onPress={() =>
+          navigation.navigate("PodcastInfo", { url: route.params.url })
+        }>
+        <Feather name="info" size={24} color="black" />
+      </TouchableOpacity>
+    </>
+  )
+}
+
+type PodcastProps = MainNavigationScreen<"Podcast">
 
 export const Podcast = ({ route, navigation }: PodcastProps) => {
   const { url = "" } = route.params ?? {}
@@ -20,9 +39,12 @@ export const Podcast = ({ route, navigation }: PodcastProps) => {
 
   useEffect(() => {
     if (podcast.data) {
-      navigation.setOptions({ headerTitle: podcast.data.title })
+      navigation.setOptions({
+        headerTitle: podcast.data.title,
+        headerRight: () => renderTopAction(route, navigation),
+      })
     }
-  }, [navigation, podcast.data])
+  }, [navigation, podcast.data, route])
 
   return (
     <WithLoaded query={podcast}>
