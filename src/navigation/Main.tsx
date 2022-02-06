@@ -17,7 +17,13 @@ const MainNavigationStack =
 const MainNavigation = () => (
   <MainNavigationStack.Navigator initialRouteName="Home">
     <MainNavigationStack.Screen name="Home" component={Home} />
-    <MainNavigationStack.Screen name="Podcast" component={Podcast} />
+    <MainNavigationStack.Screen
+      name="Podcast"
+      component={Podcast}
+      options={{
+        headerBackTitleVisible: false,
+      }}
+    />
   </MainNavigationStack.Navigator>
 )
 
