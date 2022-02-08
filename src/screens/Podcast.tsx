@@ -1,11 +1,17 @@
 import React, { useEffect } from "react"
 import { StatusBar } from "expo-status-bar"
-import { SafeAreaView, TouchableOpacity } from "react-native"
-import { Feather } from "@expo/vector-icons"
+import { Feather as RawFeather } from "@expo/vector-icons"
+import { TouchableOpacity } from "react-native"
+import { styled } from "dripsy"
+import { SafeAreaView } from "../components/Themed"
 import { MainNavigationScreen } from "../navigation/Main"
 import usePodcast from "../hooks/usePodcast"
 import WithLoaded from "../components/WithLoaded"
-import PodcastHome from "./Podcast/PodcastHome"
+import PodcastHome from "./Podcast/Home"
+
+const Feather = styled(RawFeather)({
+  color: "$header",
+})
 
 function renderTopAction(
   route: PodcastProps["route"],
@@ -18,7 +24,7 @@ function renderTopAction(
         onPress={() =>
           navigation.navigate("PodcastInfo", { url: route.params.url })
         }>
-        <Feather name="info" size={24} color="black" />
+        <Feather name="info" size={24} />
       </TouchableOpacity>
     </>
   )

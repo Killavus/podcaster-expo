@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar"
 import React, { useEffect } from "react"
-import { SafeAreaView } from "react-native"
+import { SafeAreaView } from "../components/Themed"
 import WithLoaded from "../components/WithLoaded"
 import usePodcast from "../hooks/usePodcast"
 import { MainNavigationScreen } from "../navigation/Main"

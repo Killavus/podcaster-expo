@@ -1,5 +1,5 @@
 import React from "react"
-import { ActivityIndicator } from "react-native"
+import { ActivityIndicator } from "dripsy"
 import { UseQueryResult } from "react-query"
 import CenteredSafeAreaView from "./CenteredSafeAreaView"
 
@@ -17,7 +17,7 @@ const WithLoaded = <Data, Error>({
   if (query.isLoading) {
     return (
       <CenteredSafeAreaView>
-        <ActivityIndicator size="large" />
+        <ActivityIndicator size="large" sx={{ color: "$accent" }} />
       </CenteredSafeAreaView>
     )
   }

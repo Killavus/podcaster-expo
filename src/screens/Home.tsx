@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native"
 import React, { useEffect } from "react"
-import { Text } from "react-native"
 import { StatusBar } from "expo-status-bar"
+import { Text } from "../components/Themed"
 import { MainNavigationScreen } from "../navigation/Main"
 import CenteredSafeAreaView from "../components/CenteredSafeAreaView"
 

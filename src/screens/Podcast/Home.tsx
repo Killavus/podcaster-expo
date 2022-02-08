@@ -1,21 +1,22 @@
-import React from "react"
-import { useState } from "react"
-import { useCallback } from "react"
-import { ImageBackground, useWindowDimensions } from "react-native"
+import React, { useState, useCallback } from "react"
 import {
+  useWindowDimensions,
   FlatList,
   ListRenderItemInfo,
   NativeScrollEvent,
   NativeSyntheticEvent,
-  StyleSheet,
-  Text,
 } from "react-native"
-import { TouchableOpacity, Image } from "react-native"
 import Animated, {
   useAnimatedStyle,
   useDerivedValue,
   withSpring,
 } from "react-native-reanimated"
+import { Image, useSx } from "dripsy"
+import {
+  Text,
+  TouchableOpacity,
+  ImageBackground,
+} from "../../components/Themed"
 import { FeedChannel } from "../../entities/feed"
 
 type HeaderProps = { podcast: FeedChannel; listScrollY: number }
@@ -32,13 +33,24 @@ const Header = ({ podcast, listScrollY }: HeaderProps) => {
     opacity: withSpring(scrollProgress.value),
   }))
 
+  const sx = useSx()
+
   return (
     <ImageBackground
       source={{ uri: podcast.image?.url }}
-      style={styles.headerImage}
+      sx={{
+        aspectRatio: 1,
+        justifyContent: "flex-end",
+        backgroundColor: "$black",
+        borderBottomColor: "$secondary",
+        borderBottomWidth: 1,
+      }}
       accessibilityIgnoresInvertColors>
       <Animated.View
-        style={[styles.blackScrollDrop, animatedOpacity]}></Animated.View>
+        style={[
+          sx({ width: "100%", flex: 1, backgroundColor: "$black" }),
+          animatedOpacity,
+        ]}></Animated.View>
     </ImageBackground>
   )
 }
@@ -66,16 +78,36 @@ type EpisodeItemProps = {
 const EpisodeItem = ({ episode }: EpisodeItemProps) => (
   <TouchableOpacity
     accessibilityRole="button"
-    style={styles.episodeItemContainer}>
+    sx={{
+      paddingX: "$2",
+      paddingY: "$2",
+      backgroundColor: "$background",
+      flexDirection: "row",
+      alignItems: "center",
+      flexWrap: "nowrap",
+      borderBottomColor: "$muted",
+      borderBottomWidth: 1,
+    }}>
     <Image
       source={{ uri: episode.itunes.image as string }}
-      style={styles.episodeImage}
+      sx={{
+        aspectRatio: 1,
+        width: 48,
+      }}
       accessibilityIgnoresInvertColors
     />
-    <Text numberOfLines={1} style={styles.episodeTitle}>
+    <Text
+      numberOfLines={1}
+      sx={{
+        paddingX: "$2",
+        paddingY: "$2",
+        fontSize: "$1",
+        fontWeight: "normal",
+        flex: 1,
+      }}>
       {episode.title}
     </Text>
-    <Text style={styles.durationText}>
+    <Text sx={{ color: "$secondary" }}>
       <Duration duration={episode.itunes.duration as number} />
     </Text>
   </TouchableOpacity>
@@ -130,37 +162,5 @@ const PodcastHome = ({ podcast }: Props) => {
     />
   )
 }
-
-const styles = StyleSheet.create({
-  episodeItemContainer: {
-    paddingHorizontal: 10,
-    paddingVertical: 12,
-    backgroundColor: "#fff",
-    flexDirection: "row",
-    alignItems: "center",
-    flexWrap: "nowrap",
-    borderBottomColor: "#ccc",
-    borderBottomWidth: 1,
-  },
-  blackScrollDrop: { width: "100%", flex: 1, backgroundColor: "#000" },
-  episodeImage: {
-    aspectRatio: 1,
-    width: 40,
-  },
-  episodeTitle: {
-    paddingHorizontal: 10,
-    fontSize: 16,
-    fontWeight: "normal",
-    flex: 1,
-  },
-  durationText: { color: "#777" },
-  headerImage: {
-    aspectRatio: 1,
-    justifyContent: "flex-end",
-    backgroundColor: "#000",
-    borderBottomColor: "#999",
-    borderBottomWidth: 1,
-  },
-})
 
 export default PodcastHome
