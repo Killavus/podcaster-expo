@@ -4,7 +4,7 @@ type FeedImage = {
   link: string
 }
 
-type FeedItem = {
+export type FeedItem = {
   title: string
   description: string
   link: string
